@@ -83,3 +83,12 @@ Este desafio foi baseado neste outro desafio: https://github.com/lschallenges/da
 ---
 
 Boa sorte!
+
+
+
+
+# Instalação
+
+- Instale o Docker e o docker-compose
+- Rode docker-compose up --build
+- E para criar o banco de dados: docker-compose run web bundle exec rails db:create
