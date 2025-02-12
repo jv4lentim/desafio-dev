@@ -1,4 +1,4 @@
-class FinancialRecords < ApplicationRecord
+class FinancialRecord < ApplicationRecord
   validates :transaction_type, presence: true
   validates :transaction_date, presence: true
   validates :transaction_time, presence: true
@@ -28,7 +28,7 @@ end
 #  store_name       :string
 #  store_owner      :string
 #  transaction_date :date
-#  transaction_time :time
+#  transaction_time :string
 #  transaction_type :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

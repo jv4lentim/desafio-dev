@@ -1,0 +1,26 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4">Upload de Arquivo</h1>
+
+  <% if flash[:success] %>
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <%= form_tag uploads_path, multipart: true, class: "space-y-4" do %>
+    <div class="mb-4">
+      <%= label_tag :file, "Selecione o arquivo:", class: "block font-medium text-gray-700" %>
+      <%= file_field_tag :file, accept: "text/*", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 sm:text-sm" %>
+    </div>
+
+    <div>
+      <%= submit_tag "Enviar", class: "bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+</div>
