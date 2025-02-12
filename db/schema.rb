@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_11_215435) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_12_010325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "financial_records", force: :cascade do |t|
+    t.integer "transaction_type"
+    t.date "transaction_date"
+    t.decimal "amount"
+    t.string "cpf_number"
+    t.string "card_number"
+    t.time "transaction_time"
+    t.string "store_owner"
+    t.string "store_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "testes", force: :cascade do |t|
     t.string "text"
