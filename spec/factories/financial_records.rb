@@ -11,3 +11,29 @@ FactoryBot.define do
     association :store
   end
 end
+
+# == Schema Information
+#
+# Table name: financial_records
+#
+#  id               :bigint           not null, primary key
+#  amount           :decimal(, )
+#  card_number      :string
+#  cpf_number       :string
+#  store_name       :string
+#  store_owner      :string
+#  transaction_date :date
+#  transaction_time :string
+#  transaction_type :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  store_id         :bigint           not null
+#
+# Indexes
+#
+#  index_financial_records_on_store_id  (store_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (store_id => stores.id)
+#

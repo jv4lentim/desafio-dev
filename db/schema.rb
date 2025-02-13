@@ -37,11 +37,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_12_180423) do
     t.index ["name", "owner"], name: "index_stores_on_name_and_owner", unique: true
   end
 
-  create_table "testes", force: :cascade do |t|
-    t.string "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "financial_records", "stores"
 end

@@ -9,12 +9,11 @@ WORKDIR /rails
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-    curl libjemalloc2 libvips postgresql-client \
+    curl libjemalloc2 libvips postgresql-client redis-tools \
     build-essential git libpq-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/usr/local/bundle"
+ENV BUNDLE_PATH="/usr/local/bundle"
 
 COPY Gemfile Gemfile.lock ./
 
@@ -23,8 +22,6 @@ RUN bundle install
 COPY . .
 
 RUN chown -R 1000:1000 /usr/local/bundle /rails
-
-USER 1000:1000
 
 EXPOSE 3000
 
