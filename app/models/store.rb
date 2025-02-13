@@ -6,6 +6,19 @@ class Store < ApplicationRecord
   def total_balance
     "R$ #{financial_records.sum(:amount)}"
   end
+
+  def as_json(options = {})
+    if options[:only]
+      super(options)
+    else
+      super(options.merge(
+        methods: :total_balance,
+        include: {
+          financial_records: { only: [ :id, :amount, :transaction_type, :transaction_date ] }
+        }
+      ))
+    end
+  end
 end
 # == Schema Information
 #

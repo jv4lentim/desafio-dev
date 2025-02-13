@@ -33,6 +33,12 @@ class FinancialRecord < ApplicationRecord
   def transaction_description
     I18n.t("transaction_types.#{transaction_type}.description")
   end
+
+  def as_json(options = {})
+    super(options.merge(
+      methods: [ :formatted_amount, :formatted_date ]
+    ))
+  end
 end
 
 # == Schema Information

@@ -1,0 +1,123 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/financial_records/{id}":
+    get:
+      summary: Retrieves a financial record
+      tags:
+      - FinancialRecords
+      parameters:
+      - name: id
+        in: path
+        description: Financial Record id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: financial record found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  transaction_type:
+                    type: string
+                  transaction_date:
+                    type: string
+                    format: date
+                  amount:
+                    type: string
+                  cpf_number:
+                    type: string
+                  card_number:
+                    type: string
+                  transaction_time:
+                    type: string
+                  store_owner:
+                    type: string
+                  store_name:
+                    type: string
+                required:
+                - id
+                - transaction_type
+                - transaction_date
+                - amount
+                - cpf_number
+                - card_number
+                - transaction_time
+                - store_owner
+                - store_name
+        '404':
+          description: financial record not found
+  "/api/stores":
+    get:
+      summary: Retrieves all stores
+      tags:
+      - Stores
+      responses:
+        '200':
+          description: stores found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    owner:
+                      type: string
+                  required:
+                  - id
+                  - name
+                  - owner
+  "/api/stores/{id}":
+    get:
+      summary: Retrieves a store
+      tags:
+      - Stores
+      parameters:
+      - name: id
+        in: path
+        description: Store id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: store found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  financial_records:
+                    type: array
+                    items:
+                      type: object
+                required:
+                - id
+                - name
+                - owner
+        '404':
+          description: store not found
+servers:
+- url: http://127.0.0.1:3000/
+  variables:
+    defaultHost:
+      default: http://127.0.0.1:3000/
