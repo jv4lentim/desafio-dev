@@ -5,13 +5,27 @@ class Sidekiq::ProcessCnabLineJob
   def perform(line)
     return if line.strip.empty?
 
-    data = parse_transaction_data(line)
-    persist_transaction(data)
+    store = find_or_create_store(line)
+    create_financial_record(line, store)
   rescue StandardError
     Rails.logger.error "Erro ao processar linha de transação"
   end
 
   private
+
+  def find_or_create_store(line)
+    name = line[62..-1].strip
+    owner = line[48..61].strip
+
+    Store.find_or_create_by!(name:, owner:)
+  end
+
+  def create_financial_record(line, store)
+    data = parse_transaction_data(line)
+    data[:store] = store
+
+    persist_transaction(data)
+  end
 
   def parse_transaction_data(line)
     {

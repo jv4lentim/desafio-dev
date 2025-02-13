@@ -4,8 +4,8 @@ class CnabParser
   end
 
   def call
-    uploaded_file_lines.each_with_index do |line, index|
-      Sidekiq::ProcessCnabLineJob.perform_in(5.seconds + (index * 1), line)
+    uploaded_file_lines.each do |line|
+      Sidekiq::ProcessCnabLineJob.perform_async(line)
     end
   end
 

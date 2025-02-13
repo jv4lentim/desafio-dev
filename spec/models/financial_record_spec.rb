@@ -9,10 +9,13 @@ RSpec.describe FinancialRecord, type: :model do
       amount: 100.50,
       cpf_number: "12345678901",
       card_number: "1234****5678",
-      store_owner: "John Doe",
-      store_name: "John's Store"
+      store_owner: "Loja Exemplo",
+      store_name: "Dono de Exemplo",
+      store:
     }
   end
+
+  let!(:store) { Store.create!(name: "João Victor Store", owner: "João Victor") }
 
   describe "validations" do
     it "is valid with valid attributes" do
@@ -73,4 +76,13 @@ end
 #  transaction_type :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  store_id         :bigint           not null
+#
+# Indexes
+#
+#  index_financial_records_on_store_id  (store_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (store_id => stores.id)
 #

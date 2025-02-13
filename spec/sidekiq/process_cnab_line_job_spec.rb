@@ -20,9 +20,9 @@ RSpec.describe Sidekiq::ProcessCnabLineJob, type: :job do
         record = FinancialRecord.last
 
         aggregate_failures do
-          expect(record.transaction_type).to eq(3)
+          expect(record.transaction_type).to eq("financing")
           expect(record.transaction_date).to eq(Date.new(2019, 3, 1))
-          expect(record.amount).to eq(-142.00) # Type 3 inverts the sign
+          expect(record.amount).to eq(-142.00)
           expect(record.cpf_number).to eq("09620676017")
           expect(record.card_number).to eq("4753****3153")
           expect(record.transaction_time).to eq("15:34:53")

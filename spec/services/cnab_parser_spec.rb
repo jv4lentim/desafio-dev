@@ -7,13 +7,13 @@ RSpec.describe CnabParser do
 
   describe "#call" do
     it "enqueues a Sidekiq job for each line with the correct delay" do
-      allow(Sidekiq::ProcessCnabLineJob).to receive(:perform_in)
+      allow(Sidekiq::ProcessCnabLineJob).to receive(:perform_async)
 
       cnab_parser.call
 
-      expect(Sidekiq::ProcessCnabLineJob).to have_received(:perform_in).with(5.seconds, cnab_parser.uploaded_file_lines[0])
-      expect(Sidekiq::ProcessCnabLineJob).to have_received(:perform_in).with(6.seconds, cnab_parser.uploaded_file_lines[1])
-      expect(Sidekiq::ProcessCnabLineJob).to have_received(:perform_in).with(7.seconds, cnab_parser.uploaded_file_lines[2])
+      expect(Sidekiq::ProcessCnabLineJob).to have_received(:perform_async).with(cnab_parser.uploaded_file_lines[0])
+      expect(Sidekiq::ProcessCnabLineJob).to have_received(:perform_async).with(cnab_parser.uploaded_file_lines[1])
+      expect(Sidekiq::ProcessCnabLineJob).to have_received(:perform_async).with(cnab_parser.uploaded_file_lines[2])
     end
   end
 end

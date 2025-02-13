@@ -1,4 +1,8 @@
 class UploadsController < ApplicationController
+  def index
+    @stores = Store.includes(:financial_records)
+  end
+
   def create
     uploaded_file = upload_params
 
@@ -8,7 +12,7 @@ class UploadsController < ApplicationController
     end
 
     CnabParser.new(uploaded_file).call
-    flash[:success] = "Arquivo enviado e processamento iniciado!"
+    flash[:success] = "Arquivo enviado com sucesso! O processamento está em andamento e os dados serão atualizados em breve. Recarregue a página para ver as atualizações."
 
     redirect_to uploads_path
   rescue ActionController::ParameterMissing

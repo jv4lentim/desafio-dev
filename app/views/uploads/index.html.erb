@@ -1,5 +1,5 @@
-<div class="container mx-auto p-4">
-  <h1 class="text-3xl font-bold mb-4">Upload de Arquivo</h1>
+<div class="w-full md:w-1/2 mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4">Upload de Arquivo CNAB</h1>
 
   <% if flash[:success] %>
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -16,11 +16,60 @@
   <%= form_tag uploads_path, multipart: true, class: "space-y-4" do %>
     <div class="mb-4">
       <%= label_tag :file, "Selecione o arquivo:", class: "block font-medium text-gray-700" %>
-      <%= file_field_tag :file, accept: "text/*", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 sm:text-sm" %>
+      <label for="file-upload" class="flex items-center justify-center border border-dotted border-gray-300 rounded-md bg-gray-100 p-4 cursor-pointer">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2M12 4v12m0-12 4 4m-4-4L8 8"/>
+        </svg>
+        <span class="ml-2 text-gray-700 truncate">Clique para enviar seu arquivo</span>
+      </label>
+      <%= file_field_tag :file, id: "file-upload", accept: "text/*", class: "hidden" %>
     </div>
 
     <div>
-      <%= submit_tag "Enviar", class: "bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded" %>
+      <%= submit_tag "Enviar", class: "bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded hover:cursor-pointer" %>
     </div>
   <% end %>
+
+  <% if @stores.present? %>
+    <div class="text-center">
+      <h1 class="text-xl font-medium text-gray-800 mb-2 mt-4">LOJAS</h1>
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  Loja
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Dono
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Saldo Total
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @stores.each do |store| %>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <%= store.name %>
+                  </th>
+                  <td class="px-6 py-4">
+                    <%= store.owner %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= store.total_balance %>
+                  </td>
+                  <td>
+                    <%= link_to "Ver transações", store_path(store.id) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  <% end %>
+
 </div>

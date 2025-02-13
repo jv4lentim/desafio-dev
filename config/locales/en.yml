@@ -28,4 +28,22 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  transaction_types:
+    debit:
+      description: "Débito"
+    ticket:
+      description: "Boleto"
+    financing:
+      description: "Financiamento"
+    credit:
+      description: "Crédito"
+    loan_receipt:
+      description: "Recebimento Empréstimo"
+    sales:
+      description: "Vendas"
+    ted_receipt:
+      description: "Recebimento TED"
+    doc_receipt:
+      description: "Recebimento DOC"
+    rent:
+      description: "Aluguel"

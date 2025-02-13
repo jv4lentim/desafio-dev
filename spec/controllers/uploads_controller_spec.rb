@@ -14,7 +14,7 @@ RSpec.describe UploadsController, type: :controller do
         aggregate_failures "verifying responses" do
           expect(CnabParser).to have_received(:new)
           expect(cnab_parser).to have_received(:call)
-          expect(flash[:success]).to eq("Arquivo enviado e processamento iniciado!")
+          expect(flash[:success]).to eq("Arquivo enviado com sucesso! O processamento está em andamento e os dados serão atualizados em breve. Recarregue a página para ver as atualizações.")
           expect(response).to redirect_to(uploads_path)
         end
       end
