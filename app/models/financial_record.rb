@@ -23,7 +23,7 @@ class FinancialRecord < ApplicationRecord
   }, suffix: true
 
   def formatted_amount
-    "R$ #{amount}"
+    "R$ #{'%.2f' % amount}"
   end
 
   def formatted_date

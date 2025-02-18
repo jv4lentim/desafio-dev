@@ -40,13 +40,13 @@ RSpec.describe Store, type: :model do
     let!(:financial_record2) { create(:financial_record, amount: 200.0, store:) }
 
     it "returns the total balance of all financial records" do
-      expect(store.total_balance).to eq("R$ 300.0")
+      expect(store.formatted_total_balance).to eq("R$ 300.00")
     end
 
     it "returns R$ 0.0 when there are no financial records" do
       store.financial_records.destroy_all
 
-      expect(store.total_balance).to eq("R$ 0.0")
+      expect(store.formatted_total_balance).to eq("R$ 0.00")
     end
   end
 end

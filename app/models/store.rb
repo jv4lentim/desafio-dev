@@ -3,8 +3,12 @@ class Store < ApplicationRecord
   has_many :financial_records, dependent: :destroy
   validates :name, :owner, presence: true, uniqueness: { scope: [ :name, :owner ] }
 
+  def formatted_total_balance
+    "R$ #{'%.2f' % financial_records.sum(:amount)}"
+  end
+
   def total_balance
-    "R$ #{financial_records.sum(:amount)}"
+    financial_records.sum(:amount)
   end
 
   def as_json(options = {})
@@ -12,7 +16,7 @@ class Store < ApplicationRecord
       super(options)
     else
       super(options.merge(
-        methods: :total_balance,
+        methods: :formatted_total_balance,
         include: {
           financial_records: { only: [ :id, :amount, :transaction_type, :transaction_date ] }
         }

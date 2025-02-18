@@ -24,7 +24,7 @@ RSpec.describe "Stores", type: :request do
 
       it "renders the store details in the response" do
         expect(response.body).to include(store.name)
-        expect(response.body).to include(store.total_balance)
+        expect(response.body).to include(store.formatted_total_balance)
       end
     end
 

@@ -14,8 +14,8 @@ RSpec.describe UploadsController, type: :controller do
         aggregate_failures "verifying responses" do
           expect(CnabParser).to have_received(:new)
           expect(cnab_parser).to have_received(:call)
-          expect(flash[:success]).to eq("Arquivo enviado com sucesso! O processamento está em andamento e os dados serão atualizados em breve. Recarregue a página para ver as atualizações.")
-          expect(response).to redirect_to(uploads_path)
+          expect(flash[:success]).to eq("Arquivo enviado com sucesso! O processamento está em andamento e os dados serão atualizados em breve.")
+          expect(response).to redirect_to(new_upload_path)
         end
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe UploadsController, type: :controller do
 
         aggregate_failures do
           expect(flash[:error]).to eq("Nenhum arquivo enviado.")
-          expect(response).to redirect_to(uploads_path)
+          expect(response).to redirect_to(new_upload_path)
         end
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe UploadsController, type: :controller do
 
         aggregate_failures do
           expect(flash[:error]).to eq("Formato de arquivo inválido")
-          expect(response).to redirect_to(uploads_path)
+          expect(response).to redirect_to(new_upload_path)
         end
       end
     end

@@ -1,0 +1,29 @@
+<nav class="p-4">
+  <%= render partial: "layouts/shared/sidebar_item", locals: {
+        path: root_path(section: 'home'),
+        active: params[:section] == 'home',
+        label: "Início",
+        icon: render(partial: "layouts/shared/icons/home", locals: { active: params[:section] == 'home' })
+      } %>
+
+  <%= render partial: "layouts/shared/sidebar_item", locals: {
+        path: stores_path(section: 'stores'),
+        active: params[:section] == 'stores',
+        label: "Lojas",
+        icon: render(partial: "layouts/shared/icons/stores", locals: { active: params[:section] == 'stores' })
+    } %>
+
+  <%= render partial: "layouts/shared/sidebar_item", locals: {
+        path: financial_records_path(section: 'transactions'),
+        active: params[:section] == 'transactions',
+        label: "Transações",
+        icon: render(partial: "layouts/shared/icons/transactions", locals: { active: params[:section] == 'transactions' })
+      } %>
+  
+  <%= link_to new_upload_path, class: "w-full mt-16 flex space-x-1 justify-center items-center bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-5 rounded hover:cursor-pointer" do %>
+    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2M12 4v12m0-12 4 4m-4-4L8 8"/>
+    </svg>
+    <span class="text-nowrap">Enviar CNAB</span>
+  <% end %>
+</nav>

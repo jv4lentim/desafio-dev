@@ -1,0 +1,67 @@
+<section class="w-full p-4 flex flex-col">
+  <header>
+    <h1 class="text-3xl font-bold mb-1">Transação #<%= @financial_record.id %></h1>
+    <p class="text-md mb-4 text-gray-800">Aqui você encontrará informações sobre a transação selecionada.</p>
+  </header>
+
+  <div class="grid grid-cols-2 gap-4 mt-6">
+    <article class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+      <h2 class="text-lg text-gray-100 font-medium">Valor</h2>
+      <p class="mt-6 text-3xl <%= @financial_record.amount.positive? ? "text-green-500" : "text-gray-300" %> font-medium"><%= @financial_record.formatted_amount %></p>
+    </article>
+    <article class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+      <h2 class="text-lg text-gray-100 font-medium">Loja</h2>
+      <p class="mt-6 text-3xl text-green-500 font-medium"><%= @financial_record.store.name %></p>
+    </article>
+  </div>
+
+  <h2 class="mt-4 text-lg text-gray-800 font-medium">Dados da transação</h2>
+  <section class="w-full bg-gray-100 p-4 mt-2 rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Tipo
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Data
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Horário
+          </th>
+          <th scope="col" class="px-6 py-3">
+            CPF
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Valor
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Cartão de Crédito
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900">
+            <%= @financial_record.transaction_description %>
+          </th>
+          <td class="px-6 py-4">
+            <%= @financial_record.formatted_date %>
+          </td>
+          <td class="px-6 py-4">
+            <%= @financial_record.transaction_time %>
+          </td>
+          <td class="px-6 py-4">
+            <%= @financial_record.cpf_number %>
+          </td>
+          <td class="px-6 py-4">
+            <%= @financial_record.formatted_amount %>
+          </td>
+          <td class="px-6 py-4">
+            <%= @financial_record.card_number %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>

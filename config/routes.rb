@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "uploads#index"
 
-  resources :uploads, only: [ :index, :create ]
-  resources :stores, only: :show
+  resources :uploads, only: [ :index, :create, :new ]
+  resources :stores, only: [ :index, :show ]
+  resources :financial_records, only: [ :index, :show ]
 
   namespace :api do
     resources :stores, only: [ :index, :show ], defaults: { format: :json }
