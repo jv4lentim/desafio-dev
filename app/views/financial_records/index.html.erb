@@ -17,50 +17,21 @@
 
   <h2 class="mt-4 text-lg text-gray-800 font-medium">Todas as transações registradas</h2>
   <section class="w-full bg-gray-100 p-4 mt-2 rounded-lg overflow-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Tipo
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Data
-          </th>
-          <th scope="col" class="px-6 py-3">
-            CPF
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Valor
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Loja
-          </th>
-          <th></th>
+    <%= render 'table', 
+      headers: ['Tipo', 'Data', 'CPF', 'Valor', 'Loja', ''] do %>
+      <% @financial_records.each do |fr| %>
+        <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
+          <td class="px-6 py-4 font-medium text-gray-900"><%= fr.transaction_description %></td>
+          <td class="px-6 py-4"><%= fr.formatted_date %></td>
+          <td class="px-6 py-4"><%= fr.cpf_number %></td>
+          <td class="px-6 py-4"><%= fr.formatted_amount %></td>
+          <td class="px-6 py-4"><%= fr.store.name %></td>
+          <td class="py-4 text-end pr-4 font-bold">
+            <%= link_to "Ver transação", financial_record_path(fr.id) %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @financial_records.each do |fr| %>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-              <%= fr.transaction_description %>
-            </th>
-            <td class="px-6 py-4">
-              <%= fr.formatted_date %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.cpf_number %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.formatted_amount %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.store.name %>
-            </td>
-            <td class="py-4 text-end pr-4 font-bold"><%= link_to "Ver transação", financial_record_path(fr.id) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    <% end %>
   </section>
   <div class="my-4">
     <%= paginate @financial_records %>

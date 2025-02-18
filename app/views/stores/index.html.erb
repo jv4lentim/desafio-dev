@@ -17,15 +17,8 @@
 
   <h2 class="mt-4 text-lg text-gray-800 font-medium">Todas as lojas cadastradas</h2>
   <section class="w-full bg-gray-100 p-4 mt-2 rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 border border-gray-300">
-      <thead class="text-xs text-gray-700 uppercase border-b-1 border-gray-300">
-        <tr>
-          <th scope="col" class="px-6 py-3">Loja</th>
-          <th scope="col" class="px-6 py-3">Dono</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
+    <%= render 'table', 
+      headers: ['Loja', 'Dono', ''] do %>
         <% @stores.each do |store| %>
           <tr class="odd:bg-gray-50 even:bg-gray-100 border-b border-gray-300">
             <td class="px-6 py-4 font-medium text-gray-900"><%= store.name %></td>
@@ -33,7 +26,6 @@
             <td class="py-4 text-end pr-4 font-bold"><%= link_to "Ver transações", store_path(store.id) %></td>
           </tr>
         <% end %>
-      </tbody>
-    </table>
+    <% end %>
   </section>
 </section>

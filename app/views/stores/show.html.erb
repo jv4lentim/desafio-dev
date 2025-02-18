@@ -36,53 +36,30 @@
 
   <h2 class="mt-6 text-lg text-gray-800 font-medium">Transações registradas</h2>
   <section class="w-full bg-gray-100 p-4 mt-2 rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Tipo
+    <%= render 'table', 
+        headers: ['Tipo', 'Data', 'Hora', 'CPF', 'Cartão de Crédito', 'Valor'] do %>
+      <% @financial_records.each do |fr| %>
+        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= fr.transaction_description %>
           </th>
-          <th scope="col" class="px-6 py-3">
-            Data
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Hora
-          </th>
-          <th scope="col" class="px-6 py-3">
-            CPF
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Cartão de Crédito
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Valor
-          </th>
+          <td class="px-6 py-4">
+            <%= fr.formatted_date %>
+          </td>
+          <td class="px-6 py-4">
+            <%= fr.transaction_time %>
+          </td>
+          <td class="px-6 py-4">
+            <%= fr.cpf_number %>
+          </td>
+          <td class="px-6 py-4">
+            <%= fr.card_number %>
+          </td>
+          <td class="px-6 py-4">
+            <%= fr.formatted_amount %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @financial_records.each do |fr| %>
-          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= fr.transaction_description %>
-            </th>
-            <td class="px-6 py-4">
-              <%= fr.formatted_date %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.transaction_time %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.cpf_number %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.card_number %>
-            </td>
-            <td class="px-6 py-4">
-              <%= fr.formatted_amount %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <% end %>
+    <% end %>
   </section>
 </section>
